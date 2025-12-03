@@ -15,7 +15,7 @@ const Contact = () => {
           <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-10 space-y-10">
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center ">
                 <svg className="w-7 h-7 text-red-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.22 11.11 11.11 0 003.45.55 1 1 0 011 1v3.47a1 1 0 01-1 1A18 18 0 013 4a1 1 0 011-1h3.47a1 1 0 011 1c0 1.18.19 2.33.55 3.45a1 1 0 01-.22 1.11l-2.2 2.2z"/>
                 </svg>
@@ -30,7 +30,7 @@ const Contact = () => {
             <hr className="border-gray-200" />
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center ">
                 <svg className="w-7 h-7 text-red-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>

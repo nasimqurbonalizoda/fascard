@@ -53,33 +53,33 @@ const Layout = () => {
       <footer className='max-w-[1600px] m-auto bg-[#000000] p-10'>
         <section className='max-w-[1400px] m-auto text-[white] p-4'>
           <div className='flex justify-between items-start gap-[130px]'>
-            <article className='flex flex-col gap-[10px] w-60'>
+            <article className='flex flex-col gap-3 w-60'>
               <h1 className='text-[25px] font-bold'>Exclusive</h1>
               <p>Subscribe</p>
               <p>Get 10% off your first order</p><br />
               <Input placeholder='Enter your email' suffix={<SendOutlined />} />
             </article>
-            <article className='flex flex-col gap-[10px] w-60'>
+            <article className='flex flex-col gap-3 w-60'>
               <h1 className='text-[25px] font-bold'>Support</h1>
               <p>111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</p>
               <p>exclusive@gmail.com</p>
               <p>+88015-88888-9999</p>
             </article>
-            <article className='flex flex-col gap-[10px] w-60'>
+            <article className='flex flex-col gap-3 w-60'>
               <h1 className='text-[25px] font-bold'>Account</h1>
               <p>My Account</p>
               <p>Cart</p>
               <p>Wishlist</p>
               <p>Shop</p>
             </article>
-            <article className='flex flex-col gap-[10px] w-60'>
+            <article className='flex flex-col gap-3 w-60'>
               <h1 className='text-[25px] font-bold'>Quick Link</h1>
               <p>Privacy Policy</p>
               <p>Terms Of Use</p>
               <p>FAQ</p>
               <p>Contact</p>
             </article>
-            <article className='flex flex-col gap-[10px] w-60'>
+            <article className='flex flex-col gap-3 w-60'>
               <h1 className='text-[25px] font-bold'>Social </h1>
               <div className='flex items-center gap-[15px]'>
                 <FacebookOutlined style={{ fontSize: "30px" }} />
