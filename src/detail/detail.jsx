@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import den from "../assets/image 63.png"
 import mayden from "../assets/image 58.png"
 import surhak from "../assets/Frame 611 (1).png"
-import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { getProductById } from '../reducers/product'
 const Detail = () => {
+  const { id } = useParams()
+
+  const dataByid = useSelector((state) => state.ProductSlice2.product)
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProductById(id))
+  }, [dispatch])
+
   return (
     <div className="max-w-7xl mx-auto p-6 font-sans bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
 
 
         <div className="flex flex-col-reverse lg:flex-row gap-6">
-        
+
           <div className="flex lg:flex-col gap-4">
             <div className="w-20 h-20 bg-gray-100 rounded-lg border-2 border-blue-500">
               <img src={mayden} className="w-full h-full object-contain p-2" />
@@ -25,30 +39,35 @@ const Detail = () => {
               <img src={mayden} className="w-full h-full object-contain p-2" />
             </div>
           </div>
-          
+
           <div className="relative bg-gray-50 rounded-2xl p-12 group">
-            <img
+            {/* <img
               src={den}
               alt="Havic HV-G-92 Gamepad"
               className="max-w-full max-h-96 object-contain"
-            />
+            /> */}
+            {dataByid?.images?.map((elem) => {
+              return (
+                <img key={elem.id} src={`http://37.27.29.18:8002/images/${elem.images}`} className="max-w-full max-h-96 object-contain"  />
+              )
+            })}
             <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded text-sm font-bold">
               -40%
             </div>
             <div className="absolute top-4 right-4 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition">
               <button className="bg-white p-3 rounded-full shadow-lg hover:scale-110">
-               
-               
+
+
               </button>
               <button className="bg-white p-3 rounded-full shadow-lg hover:scale-110">
-                
+
               </button>
             </div>
           </div>
         </div>
 
         <div className="flex flex-col justify-center space-y-6">
-          <h1 className="text-4xl font-bold">Havic HV-G-92 Gamepad</h1>
+          <h1 className="text-4xl font-bold">{dataByid?.productName}</h1>
 
           <div className="flex items-center gap-4 text-lg">
             <div className="flex text-yellow-500 text-xl">★★★★★</div>
@@ -56,20 +75,20 @@ const Detail = () => {
             <span className="text-green-600 font-semibold">In Stock</span>
           </div>
 
-          <div className="text-3xl font-bold">$192.00</div>
+          <div className="text-3xl font-bold">{dataByid?.price}</div>
 
           <p className="text-gray-600 leading-relaxed">
             PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.
           </p>
 
           <div className="border-t border-gray-300 pt-6 space-y-8">
-            
+
             <div>
-              <span className="text-gray-600 mr-6">Colours:</span>
+              <span className="text-gray-600 mr-6">Colours:{dataByid?.color}</span>
               <button className="w-8 h-8 bg-gray-800 rounded-full border-4 border-blue-500"></button>
               <button className="w-8 h-8 bg-red-600 rounded-full ml-3"></button>
             </div>
-            
+
             <div>
               <span className="text-gray-600 mr-6">Size:</span>
               <button className="px-4 py-2 border border-gray-300 rounded hover:bg-red-500 hover:text-white">XS</button>
@@ -91,20 +110,20 @@ const Detail = () => {
               </button>
 
               <button className="p-4 border border-gray-300 rounded hover:bg-gray-50">
-               <input type="checkbox" name="" id=""  className="p-4 border border-gray-300 rounded hover:bg-gray-50"/>
+                <input type="checkbox" name="" id="" className="p-4 border border-gray-300 rounded hover:bg-gray-50" />
               </button>
             </div>
 
             <div className="border border-gray-300 rounded-lg overflow-hidden mt-10">
               <div className="flex gap-5 p-6 border-b border-gray-300">
-               
+
                 <div>
                   <div className="font-semibold">Free Delivery</div>
                   <div className="text-sm underline">Enter your postal code for Delivery Availability</div>
                 </div>
               </div>
               <div className="flex gap-5 p-6">
-                
+
                 <div>
                   <div className="font-semibold">Return Delivery</div>
                   <div className="text-sm">Free 30 Days Delivery Returns. <u>Details</u></div>
@@ -122,7 +141,7 @@ const Detail = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          
+
           <div className="group cursor-pointer">
             <div className="relative bg-gray-50 p-8 rounded-t-lg">
               <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 text-sm rounded">-40%</div>
