@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { saveToken } from '../utility/api';
 import { login } from '../reducers/auth';
 import { useDispatch } from 'react-redux';
 
