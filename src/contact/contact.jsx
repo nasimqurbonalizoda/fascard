@@ -76,7 +76,7 @@ const Contact = () => {
               ></textarea>
 
               <div className="text-right">
-                <button onClick={()=> navigate("/login")}
+                <button onClick={()=> navigate("/Products")}
                   type="submit"
                   className="px-12 py-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition shadow-lg" >
                   Send Message

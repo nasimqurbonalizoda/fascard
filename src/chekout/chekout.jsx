@@ -6,16 +6,18 @@ import cart1 from "../assets/Bkash.png"
 import cart2 from "../assets/Visa.png"
 import cart3 from "../assets/Mastercard.png"
 import cart4 from "../assets/Nagad.png"
+import { useNavigate } from 'react-router-dom'
 
 
 const Chekout = () => {
+  const navigate=useNavigate()
   return (
     <div>
       <div className="min-h-screen bg-gray-50 py-8 px-4">
         <div className="max-w-7xl mx-auto">
 
-          <p className="text-sm text-gray-600 mb-8">
-            Product / View Cart / <span className="font-semibold text-black">Checkout</span>
+          <p onClick={()=> navigate("/products")} className="text-sm text-gray-600 mb-8">
+             Product / View Cart / <span className="font-semibold text-black">Checkout</span>
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">

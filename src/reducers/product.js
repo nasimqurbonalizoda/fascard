@@ -21,13 +21,21 @@ export const getProductById = createAsyncThunk("product/getProductbyid", async f
     console.log(error);
   }
 });
+
+export const GetCategory = createAsyncThunk("category/getcategory",async () => {
+  try {
+    const {data} = await axiosRequest.get(`/Category/get-categories`)
+    return data.data
+  } catch (error) {
+    console.log(error);
+  }
+})
 export const ProductSlice = createSlice({
   name: "ProductSlice2",
   initialState: {
     value: 0,
     product: [],
-        text: "",
-
+    text: "",
   },
   reducers: {
     setSearch(state, action) {
@@ -36,6 +44,9 @@ export const ProductSlice = createSlice({
   },
   extraReducers: (builder) => {
    builder.addCase(getProduct.fulfilled, (state, action) => {
+  state.product = action.payload;
+}),
+   builder.addCase(GetCategory.fulfilled, (state, action) => {
   state.product = action.payload;
 }),
    builder.addCase(getProductById.fulfilled, (state, action) => {

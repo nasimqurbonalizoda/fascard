@@ -18,7 +18,7 @@ import { FaHeart, FaShoppingCart, FaEye, FaArrowLeft, FaArrowRight } from 'react
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct } from '../reducers/product'
-
+import { AddCart } from "../reducers/cart";
 const Homepage = () => {
     const navigate = useNavigate()
     const data = useSelector((state) => state.ProductSlice2.product)
@@ -31,11 +31,11 @@ const Homepage = () => {
         dispatch(getProduct())
     }, [dispatch])
 
-      const date = new Date()
-      const hour= date.getHours()
-       const minute=date.getMinutes()
-       const second=date.getSeconds()
-      const day = date.getDay()
+    const date = new Date()
+    const hour = date.getHours()
+    const minute = date.getMinutes()
+    const second = date.getSeconds()
+    const day = date.getDay()
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -127,7 +127,7 @@ const Homepage = () => {
                                         </div>
                                         <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition z-10">
                                             <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
-                                                <FaHeart onClick={()=> navigate("/detail")} className="text-gray-700" />
+                                                <FaHeart onClick={() => navigate("/detail")} className="text-gray-700" />
                                             </button>
                                             <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
                                                 <FaEye className="text-gray-700" />
@@ -142,9 +142,12 @@ const Homepage = () => {
                                                 />
                                             </Link>
                                         </div>
-                                        <div className="absolute cursor-pointer inset-x-0 bottom-0 bg-black text-white text-center py-3 opacity-0 group-hover:opacity-100 transition font-medium">
-                                            Add To Cart
-                                        </div>
+                                        <button
+                                            onClick={() => dispatch(AddCart(elem.id))}
+                                            className="mt-4 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition text-sm font-medium"
+                                        >
+                                            Add to Cart
+                                        </button>
                                         <div className="p-4">
                                             <h3 className="font-medium text-sm line-clamp-2">{elem.productName}</h3>
                                             <div className="flex items-center gap-3 mt-2">
@@ -251,48 +254,51 @@ const Homepage = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-                        
-                   {data?.products?.map((elem) => {
-                                return (
-                                    <div key={elem.id} className="bg-white rounded-lg overflow-hidden group relative hover:shadow-2xl transition-shadow">
-                                        <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 text-xs font-bold rounded z-10">
-                                            -40%
+
+                        {data?.products?.map((elem) => {
+                            return (
+                                <div key={elem.id} className="bg-white rounded-lg overflow-hidden group relative hover:shadow-2xl transition-shadow">
+                                    <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 text-xs font-bold rounded z-10">
+                                        -40%
+                                    </div>
+                                    <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                                        <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
+                                            <FaHeart onClick={() => navigate("/detail")} className="text-gray-700" />
+                                        </button>
+                                        <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
+                                            <FaEye className="text-gray-700" />
+                                        </button>
+                                    </div>
+                                    <div className="h-48 bg-gray-50 flex items-center justify-center p-4">
+                                        <Link to={`/infopage/${elem.id}`}>
+                                            <img
+                                                src={`http://37.27.29.18:8002/images/${elem.image}`}
+                                                alt="Gamepad"
+                                                className="max-h-full max-w-full object-contain"
+                                            />
+                                        </Link>
+                                    </div>
+                                    <button
+                                        onClick={() => dispatch(AddCart(elem.id))}
+                                        className="mt-4 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition text-sm font-medium"
+                                    >
+                                        Add to Cart
+                                    </button>
+                                    <div className="p-4">
+                                        <h3 className="font-medium text-sm line-clamp-2">{elem.productName}</h3>
+                                        <div className="flex items-center gap-3 mt-2">
+                                            <span className="text-red-500 font-bold"> $ {elem.price}</span>
+                                            <span className="text-gray-400 line-through text-sm">{elem.discountPrice} $</span>
                                         </div>
-                                        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition z-10">
-                                            <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
-                                                <FaHeart onClick={()=> navigate("/detail")} className="text-gray-700" />
-                                            </button>
-                                            <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
-                                                <FaEye className="text-gray-700" />
-                                            </button>
-                                        </div>
-                                        <div className="h-48 bg-gray-50 flex items-center justify-center p-4">
-                                            <Link to={`/infopage/${elem.id}`}>
-                                                <img
-                                                    src={`http://37.27.29.18:8002/images/${elem.image}`}
-                                                    alt="Gamepad"
-                                                    className="max-h-full max-w-full object-contain"
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className="absolute cursor-pointer inset-x-0 bottom-0 bg-black text-white text-center py-3 opacity-0 group-hover:opacity-100 transition font-medium">
-                                            Add To Cart
-                                        </div>
-                                        <div className="p-4">
-                                            <h3 className="font-medium text-sm line-clamp-2">{elem.productName}</h3>
-                                            <div className="flex items-center gap-3 mt-2">
-                                                <span className="text-red-500 font-bold"> $ {elem.price}</span>
-                                                <span className="text-gray-400 line-through text-sm">{elem.discountPrice} $</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 mt-2">
-                                                <span className="text-yellow-400 text-lg">★★★★★</span>
-                                                <span className="text-gray-500 text-sm">({elem.categoryId})</span>
-                                            </div>
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <span className="text-yellow-400 text-lg">★★★★★</span>
+                                            <span className="text-gray-500 text-sm">({elem.categoryId})</span>
                                         </div>
                                     </div>
-                                )
-                            })
-                            }   
+                                </div>
+                            )
+                        })
+                        }
 
                     </div>
                 </div>
@@ -354,51 +360,54 @@ const Homepage = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
-                   {data?.products?.map((elem) => {
-                                return (
-                                    <div key={elem.id} className="bg-white rounded-lg overflow-hidden group relative hover:shadow-2xl transition-shadow">
-                                        <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 text-xs font-bold rounded z-10">
-                                            -40%
-                                        </div>
-                                        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition z-10">
-                                            <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
-                                                <FaHeart onClick={()=> navigate("/detail")} className="text-gray-700" />
-                                            </button>
-                                            <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
-                                                <FaEye className="text-gray-700" />
-                                            </button>
-                                        </div>
-                                        <div className="h-48 bg-gray-50 flex items-center justify-center p-4">
-                                            <Link to={`/infopage/${elem.id}`}>
-                                                <img
-                                                    src={`http://37.27.29.18:8002/images/${elem.image}`}
-                                                    alt="Gamepad"
-                                                    className="max-h-full max-w-full object-contain"
-                                                />
-                                            </Link>
-                                        </div>
-                                        <div className="absolute cursor-pointer inset-x-0 bottom-0 bg-black text-white text-center py-3 opacity-0 group-hover:opacity-100 transition font-medium">
-                                            Add To Cart
-                                        </div>
-                                        <div className="p-4">
-                                            <h3 className="font-medium text-sm line-clamp-2">{elem.productName}</h3>
-                                            <div className="flex items-center gap-3 mt-2">
-                                                <span className="text-red-500 font-bold"> $ {elem.price}</span>
-                                                <span className="text-gray-400 line-through text-sm">{elem.discountPrice} $</span>
-                                            </div>
-                                            <div className="flex items-center gap-2 mt-2">
-                                                <span className="text-yellow-400 text-lg">★★★★★</span>
-                                                <span className="text-gray-500 text-sm">({elem.categoryId})</span>
-                                            </div>
-                                        </div>
+                    {data?.products?.map((elem) => {
+                        return (
+                            <div key={elem.id} className="bg-white rounded-lg overflow-hidden group relative hover:shadow-2xl transition-shadow">
+                                <div className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 text-xs font-bold rounded z-10">
+                                    -40%
+                                </div>
+                                <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                                    <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
+                                        <FaHeart onClick={() => navigate("/detail")} className="text-gray-700" />
+                                    </button>
+                                    <button className="w-9 h-9 bg-white rounded-full shadow flex items-center justify-center hover:bg-gray-100">
+                                        <FaEye className="text-gray-700" />
+                                    </button>
+                                </div>
+                                <div className="h-48 bg-gray-50 flex items-center justify-center p-4">
+                                    <Link to={`/infopage/${elem.id}`}>
+                                        <img
+                                            src={`http://37.27.29.18:8002/images/${elem.image}`}
+                                            alt="Gamepad"
+                                            className="max-h-full max-w-full object-contain"
+                                        />
+                                    </Link>
+                                </div>
+                                <button
+                                    onClick={() => dispatch(AddCart(elem.id))}
+                                    className="mt-4 w-full bg-black text-white py-3 rounded-lg hover:bg-gray-900 transition text-sm font-medium"
+                                >
+                                    Add to Cart
+                                </button>
+                                <div className="p-4">
+                                    <h3 className="font-medium text-sm line-clamp-2">{elem.productName}</h3>
+                                    <div className="flex items-center gap-3 mt-2">
+                                        <span className="text-red-500 font-bold"> $ {elem.price}</span>
+                                        <span className="text-gray-400 line-through text-sm">{elem.discountPrice} $</span>
                                     </div>
-                                )
-                            })
-                            }
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <span className="text-yellow-400 text-lg">★★★★★</span>
+                                        <span className="text-gray-500 text-sm">({elem.categoryId})</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })
+                    }
                 </div>
 
                 <div className="text-center mt-16">
-                    <button onClick={()=> navigate("/products")} className="bg-red-500 text-white px-12 py-4 cursor-pointer rounded hover:bg-red-600 transition font-medium text-lg">
+                    <button onClick={() => navigate("/products")} className="bg-red-500 text-white px-12 py-4 cursor-pointer rounded hover:bg-red-600 transition font-medium text-lg">
                         View All Products
                     </button>
                 </div>

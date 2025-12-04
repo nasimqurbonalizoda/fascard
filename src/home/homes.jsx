@@ -8,6 +8,9 @@ import monitor from "../assets/Frame 613.png"
 import stul from "../assets/Frame 614.png"
 import { FaHeart, FaShoppingCart, FaEye, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 const Homes = () => {
+
+  // const date=new Date()
+  // const day=date.getDate()
   return (
         <div className="min-h-screen bg-gray-50">
     
@@ -71,7 +74,7 @@ const Homes = () => {
                   </div>
     
                   <div className="flex items-center gap-4 text-3xl font-bold">
-                    <div className="text-center"><span className="text-xs block text-gray-500">Days</span>03</div>
+                    <div className="text-center"><span className="text-xs block text-gray-500">Days</span></div>
                     <span className="text-red-500">:</span>
                     <div className="text-center"><span className="text-xs block text-gray-500">Hours</span>23</div>
                     <span className="text-red-500">:</span>

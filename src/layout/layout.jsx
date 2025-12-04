@@ -1,102 +1,179 @@
-import React from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
-import img from "../assets/Group 1116606595.png"
-import wish from "../assets/Wishlist.png"
-import carzinka from "../assets/Cart1.png"
-import user from "../assets/user.png"
-import { FacebookOutlined, HeartOutlined, InstagramOutlined, LinkedinOutlined, SearchOutlined, SendOutlined, ShoppingCartOutlined, TwitterOutlined, UserOutlined } from '@ant-design/icons'
-import { Input } from 'antd'
-import '../index.css'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import img from "../assets/Group 1116606595.png";
+import wish from "../assets/Wishlist.png";
+import carzinka from "../assets/Cart1.png";
+import user from "../assets/user.png";
+import {
+  FacebookOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  TwitterOutlined,
+  SearchOutlined,
+  SendOutlined,
+  MenuOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
+import { Input } from 'antd';
 
 const Layout = () => {
-  const { pathname } = useLocation()
-  const dispatch=useDispatch()
+  const { pathname } = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div>
-      <header className='max-w-[1400px] m-auto p-4'>
-        <nav className='flex justify-between items-center'>
-          <img src={img} style={{ width: '150px', height: "50px", marginLeft: "50px" }} alt="" />
-          <div className='flex items-center gap-[170px]'>
-            <ul className='flex items-center gap-[30px]'>
-              <Link to="/homepage" style={{ color: pathname == "/homepage" ? "red" : "black" }}>Homepage</Link>              <Link to="/contact" style={{ color: pathname == "/contact" ? "red" : "black" }}>Contact</Link>
-              <Link to="/about" style={{ color: pathname == "/about" ? "red" : "black" }}>About</Link>
-              <Link to="/" style={{ color: pathname == "/" ? "red" : "black" }}>Signup</Link>
+    <div className="min-h-screen flex flex-col">
+      <header className="border-b">
+        <div className="max-w-[1400px] mx-auto px-4 py-4">
+          <nav className="flex items-center justify-between">
+            <Link to="/homepage">
+              <img src={img} alt="Logo" className="h-12 w-auto" />
+            </Link>
+
+            <ul className="hidden md:flex items-center gap-8 text-base font-medium">
+              <li>
+                <Link to="/homepage" className={pathname === "/homepage" ? "text-red-600" : "text-black"}>
+                  Homepage
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className={pathname === "/about" ? "text-red-600" : "text-black"}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className={pathname === "/" ? "text-red-600" : "text-black"}>
+                  Signup
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className={pathname === "/login" ? "text-red-600" : "text-black"}>
+                  Login
+                </Link>
+              </li>
             </ul>
-          </div>
-          <div className='flex items-center gap-[30px]'>
-            <Input style={{ width: "300px" }}  placeholder="What are you looking for?" suffix={<SearchOutlined />} />
-            <Link to="/wishlist" style={{ color: pathname == "/wishlist" ? "red" : "black" }}>
-              <img src={wish} style={{ width: '32px', height: "32px" }} alt="" />
-            </Link>
-            <Link to="/cart" style={{ color: pathname == "/cart" ? "red" : "black" }}>
-              <img src={carzinka} style={{ width: '24px', height: "24px" }} alt="" />
-            </Link>
-            <Link to="/account" style={{ color: pathname == "/account" ? "red" : "black" }}>
-            <img src={user} style={{ width: '24px', height: "24px" }} alt="" />
-            </Link>
-          </div>
-        </nav>
+
+            <div className="flex items-center gap-4 md:gap-8">
+              <Input
+                placeholder="What are you looking for?"
+                suffix={<SearchOutlined />}
+                className="hidden md:block w-48 lg:w-72"
+              />
+
+              <div className="flex items-center gap-4 md:gap-6">
+                <Link to="/wishlist">
+                  <img src={wish} alt="Wishlist" className="w-14 h-8" />
+                </Link>
+                <Link to="/cart">
+                  <img src={carzinka} alt="Cart" className="w-14 h-6" />
+                </Link>
+                <Link to="/account">
+                  <img src={user} alt="Account" className="w-14 h-6" />
+                </Link>
+
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="md:hidden text-2xl"
+                >
+                  {mobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
+                </button>
+              </div>
+            </div>
+          </nav>
+
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 border-t pt-4 pb-4">
+              <ul className="flex flex-col gap-5 text-lg font-medium">
+                <li>
+                  <Link to="/homepage" className={pathname === "/homepage" ? "text-red-600" : "text-black"}>
+                    Homepage
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className={pathname === "/about" ? "text-red-600" : "text-black"}>
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/" className={pathname === "/" ? "text-red-600" : "text-black"}>
+                    Signup
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/login" className={pathname === "/login" ? "text-red-600" : "text-black"}>
+                    Login
+                  </Link>
+                </li>
+              </ul>
+
+              <Input
+                placeholder="What are you looking for?"
+                suffix={<SearchOutlined />}
+                className="mt-5"
+              />
+            </div>
+          )}
+        </div>
       </header>
 
-      <div style={{ display: 'flex', gap: "20px", margin: "20px" }}>
-        {/* <Link to="/" style={{ color: pathname == "/" ? "red" : "black" }}>Signup</Link> */}
-        <Link to="/login" style={{ color: pathname == "/login" ? "red" : "black" }}>Login</Link>
-        <Link to="/homes" style={{ color: pathname == "/homes" ? "red" : "black" }}>Homes</Link>
-        <Link to="/products" style={{ color: pathname == "/products" ? "red" : "black" }}>Products</Link>
-        <Link to="/detail" style={{ color: pathname == "/detail" ? "red" : "black" }}>Detail</Link>
-        <Link to="/chekout" style={{ color: pathname == "/chekout" ? "red" : "black" }}>Chekout</Link>
-      </div>
-      <main className='max-w-[1400px] m-auto p-4'>
+      <main className="flex-1 max-w-[1400px] mx-auto px-4 py-8 w-full">
         <Outlet />
       </main>
-      <footer className='max-w-[1600px] m-auto bg-[#000000] p-10'>
-        <section className='max-w-[1400px] m-auto text-[white] p-4'>
-          <div className='flex justify-between items-start gap-[130px]'>
-            <article className='flex flex-col gap-3 w-60'>
-              <h1 className='text-[25px] font-bold'>Exclusive</h1>
+
+      <footer className="bg-black text-white py-12 mt-auto">
+        <section className="max-w-[1400px] mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+            <article className="space-y-4">
+              <h1 className="text-2xl font-bold">Exclusive</h1>
               <p>Subscribe</p>
-              <p>Get 10% off your first order</p><br />
-              <Input placeholder='Enter your email' suffix={<SendOutlined />} />
+              <p>Get 10% off your first order</p>
+              <Input
+                placeholder="Enter your email"
+                suffix={<SendOutlined />}
+                className="bg-transparent border-white text-white placeholder-gray-400"
+              />
             </article>
-            <article className='flex flex-col gap-3 w-60'>
-              <h1 className='text-[25px] font-bold'>Support</h1>
-              <p>111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</p>
+
+            <article className="space-y-4">
+              <h1 className="text-2xl font-bold">Support</h1>
+              <p>111 Bijoy sarani, Dhaka,<br />DH 1515, Bangladesh.</p>
               <p>exclusive@gmail.com</p>
               <p>+88015-88888-9999</p>
             </article>
-            <article className='flex flex-col gap-3 w-60'>
-              <h1 className='text-[25px] font-bold'>Account</h1>
+
+            <article className="space-y-4">
+              <h1 className="text-2xl font-bold">Account</h1>
               <p>My Account</p>
               <p>Cart</p>
               <p>Wishlist</p>
               <p>Shop</p>
             </article>
-            <article className='flex flex-col gap-3 w-60'>
-              <h1 className='text-[25px] font-bold'>Quick Link</h1>
+
+            <article className="space-y-4">
+              <h1 className="text-2xl font-bold">Quick Link</h1>
               <p>Privacy Policy</p>
               <p>Terms Of Use</p>
               <p>FAQ</p>
               <p>Contact</p>
             </article>
-            <article className='flex flex-col gap-3 w-60'>
-              <h1 className='text-[25px] font-bold'>Social </h1>
-              <div className='flex items-center gap-[15px]'>
-                <FacebookOutlined style={{ fontSize: "30px" }} />
-                <LinkedinOutlined style={{ fontSize: "30px" }} />
-                <InstagramOutlined style={{ fontSize: "30px" }} />
-                <TwitterOutlined style={{ fontSize: "30px" }} />
+
+            <article className="space-y-4">
+              <h1 className="text-2xl font-bold">Social</h1>
+              <div className="flex gap-6 text-3xl">
+                <FacebookOutlined />
+                <LinkedinOutlined />
+                <InstagramOutlined />
+                <TwitterOutlined />
               </div>
             </article>
           </div>
-          <div className='relative top-[30px] text-center'>
-            <p className='text-[grey] font-bold'>@Copyright Rimel 2022. All right reserved</p>
-          </div>
+
+          <p className="text-center text-gray-500 mt-12">
+            © Copyright Rimel 2025. All rights reserved
+          </p>
         </section>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
-
+export default Layout;
